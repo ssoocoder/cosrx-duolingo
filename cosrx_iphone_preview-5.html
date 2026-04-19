@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COSRX × Duolingo — Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #1C1C1E;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  padding: 40px 20px;
+}
+
+/* ─── iPhone 16 Pro Mockup ─── */
+.iphone-wrap { position: relative; width: 393px; flex-shrink: 0; }
+
+.iphone-shell {
+  position: relative;
+  width: 393px;
+  background: #000000;
+  border-radius: 54px;
+  padding: 14px;
+  box-shadow:
+    0 0 0 1px #ffffffb8,
+    0 0 0 3px #7d7d7d,
+    0 30px 80px rgba(0,0,0,0.8),
+    inset 0 0 0 1px rgba(48, 48, 48, 0.542);
+}
+
+.btn-side { position: absolute; background: #7b7b7bd2; border-radius: 3px; }
+.btn-power  { width: 4px; height: 90px; right: -5px; top: 140px; }
+.btn-vol-up { width: 4px; height: 60px; left: -5px; top: 140px; }
+.btn-vol-dn { width: 4px; height: 60px; left: -5px; top: 215px; }
+.btn-silent { width: 4px; height: 38px; left: -5px; top: 100px; }
+
+.iphone-screen-outer {
+  width: 100%;
+  background: #000;
+  border-radius: 44px;
+  overflow: hidden;
+  position: relative;
+}
+
+.dynamic-island {
+  position: absolute;
+  top: 12px; left: 50%;
+  transform: translateX(-50%);
+  width: 120px; height: 34px;
+  background: #000;
+  border-radius: 20px;
+  z-index: 100;
+}
+
+.iphone-scroll {
+  height: 780px;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.iphone-scroll::-webkit-scrollbar { display: none; }
+
+/* ─── Page ─── */
+:root {
+  --green: #58CC02;
+  --bg-dark: #111111;
+  --bg-card: #1A1A1A;
+  --white: #FFFFFF;
+  --gray: #AAAAAA;
+  --pink: #C84B8F;
+}
+.page {
+  background: #0A0A0A;
+  color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ─── HERO ─── */
+.hero {
+  background: #0A0A0A;
+  position: relative;
+  overflow: hidden;
+  height: 780px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* White EVENT bar */
+.hero-topbar {
+  background: #FFFFFF;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 20;
+}
+.event-label {
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: #111;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 45px;
+}
+
+/* Vector light beams */
+.vectors {
+  position: absolute;
+  top: 70px; left: 0;
+  height: calc(100% - 90px);
+  width: 100%; height: calc(100% - 90px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* COSRX logo */
+.cosrx-logo {
+  position: absolute;
+  top: 143px; right: 22px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--white);
+  z-index: 10;
+}
+
+/* Hero title */
+.hero-text {
+  position: absolute;
+  top: 138px; left: 22px;
+  z-index: 10;
+}
+.hero-title {
+  font-size: 45px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: var(--white);
+}
+
+
+
+/* Date */
+.hero-meta {
+  position: absolute;
+  top: 280px; left: 190px;text-align: right; right: 24px; left: auto;
+  font-size: 11px;
+  color: var(--white);
+  line-height: 1.9;
+  z-index: 10;
+}
+.hero-meta strong { color: var(--white); font-size: 11px; display: block; }
+
+/* TVC image — character + bottle combined */
+.hero-char {
+  position: absolute;
+  bottom: 68px;
+  left: 55%;
+  transform: translateX(-50%);
+  width: 340px;
+  z-index: 5;
+  pointer-events: none;
+}
+.hero-char img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* CTA */
+.hero-cta {
+  position: absolute;
+  bottom: 20px;
+  left: 20px; right: 20px;
+  z-index: 20;
+}
+.btn-primary {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: var(--white);
+  color: #000000;
+  font-size: 25px;
+  font-weight: 550;
+  text-align: center;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: 'Noto Sans KR', sans-serif;
+  box-shadow: none; /* 기본은 없음 */
+}
+
+.btn-primary:hover {
+  box-shadow: 0 4px 24px rgba(132, 255, 0, 0.474); /* 올려둘때만 */
+}
+
+/* ─── INTRO ─── */
+.intro {
+  background: #000000;
+  padding: 80px 24px 180px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.intro::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 110%, rgba(88,204,2,0.07) 0%, transparent 60%);
+}
+.eyebrow { font-size: 11px; color: var(--black); letter-spacing: 1px; margin-bottom: 10px; position: relative; z-index: 1; }
+.sec-title { font-size: 25px; font-weight: 900; line-height: 1.3; margin-bottom: 36px; position: relative; z-index: 1; }
+
+.duo-doctor-area { position: relative; display: inline-block; margin-bottom: 36px; margin-top: 80px;}
+.duo-css { width: 110px; height: 110px; background: var(--green); border-radius: 50% 50% 45% 45%; position: relative; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 0 40px rgba(88,204,2,0.3); }
+.duo-css::before { content: ''; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); width: 30px; height: 18px; background: var(--green); border-radius: 0 0 50% 50%; }
+.duo-eyes { display: flex; gap: 10px; margin-top: -6px; }
+.eye { width: 22px; height: 26px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.pupil { width: 10px; height: 14px; background: #1A0A00; border-radius: 50%; position: relative; top: 3px; }
+.duo-brow { position: absolute; top: 18px; display: flex; gap: 18px; }
+.brow { width: 20px; height: 4px; background: #1A0A00; border-radius: 4px; }
+.brow.left { transform: rotate(-15deg); } .brow.right { transform: rotate(15deg); }
+.duo-beak { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 12px solid #E8A500; }
+
+.bubble { position: absolute; font-size: 11px; color: #111111; font-weight: 600; white-space: nowrap; display: flex; align-items: center; justify-content: center;}
+.bubble span {position: absolute;  top:38%; left: 50%; transform: translate(-50%, -50%);color: #111111;font-size: 11px; font-weight: 600;} /* img 위에 올라가게 */
+.b1 span { font-size: 11px; }
+.b2 span { font-size: 10px; }
+.b3 span { font-size: 13px; }
+.b1 { top: 10%; left: -70px; }
+.b2 { top: 25%; right: -50px; }
+.b3 { bottom: 12%; right: -30px; }
+
+.intro-msg { font-size: 21px; line-height: 1.65; position: relative; z-index: 1; }
+.tag { display: inline-block; background: var(--black); color: #88E210; font-weight: 700; border-radius: 6px; padding: 1px 9px; font-size: 21px; }
+
+/* ─── STEP 1 ─── */
+.step1 { 
+  background: #5b3f3f99;
+  padding: 70px 24px 70px; 
+  position: relative;
+  text-align: center;
+}
+.step-badge { font-size: 10px; letter-spacing: 1px; color: var(--white); text-transform: uppercase; margin-bottom: 12px; display: block; }
+.step-title { font-size: 18px; font-weight: 700; line-height: 1.3; margin-bottom: 36px; }
+.products-row { display: flex; justify-content: center; align-items: center; gap: 16px; }
+.prod { background: none; border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px; gap: 6px; }
+.prod.main { width: 120px; height: 150px; margin-left: -10px; }
+.prod.side { width: 95px; height: 130px; }
+
+/* ─── STEP 2 ─── */
+.step2 { 
+  background: linear-gradient(180deg, #ffb7cf -70.16%, rgba(255, 158, 190, 0.006) 71.39%);
+  padding: 70px 25px 140px; 
+  text-align: center; 
+  position: relative; 
+  overflow: visible; 
+}
+.lang-bg { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding: 0 28px; gap: 6px; opacity: 0.4; pointer-events: none; }
+.lang-bg span { font-size: 18px; font-weight: 700; font-style: sans-serif; }
+.streak-card { border-radius: 18px; padding: 20px 22px; margin: 25px auto 0; max-width: 360px; display: flex; align-items: flex-start; gap: 14px; text-align: left; position: relative; z-index: 1; }
+.streak-num { font-size: 15px; font-weight: 900; color: white; }
+.streak-info { flex: 1; }
+.streak-info p { font-size: 12px; color: white; font-weight: 500; line-height: 1.2; }
+.streak-days { display: flex; gap: 5px; margin-top: 15px; }
+.day { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: white; }
+.day-on { width:20px; font-size:9px; color:white; text-align:center; } .day.off { background: #A10034; width: 19; height: 19; }
+
+/* ─── EXAMPLES ─── */
+.examples {
+  background: #000000;
+  padding: 56px 24px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.examples-bg {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+  /* width, height, object-fit 제거 */
+}
+
+.examples .sec-title {
+  color: #FF709D;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+/* 말풍선 + 듀오 래퍼 */
+.speech-area {
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+  z-index: 1;
+}
+.speech-bubble-wrap {
+  position: relative;
+  max-width: 255px;
+  margin: 0 auto;
+}
+.speech-bubble-wrap img.bubble-img {
+  width: 100%;
+  display: block;
+}
+.speech-text {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  width: 82%;
+  font-size: 11.5px;
+  font-weight: 500;
+  font-style: normal;
+  color: #ffffff;
+  line-height: 1.65;
+  text-align: left;
+  letter-spacing: -0.2px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.speech-duo {
+  position: absolute;
+  bottom: -32px;
+  right: -28px;
+  width: 78px;
+  z-index: 2;
+}
+
+/* 예시 카드 */
+.example-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 1;
+}
+.ex-badge {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.5px;
+  display: block;
+  text-align: center;
+  margin-bottom: 6px;  /* 카드랑 간격 */
+}
+
+.ex-card {
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.ex-label { padding: 10px 12px; background: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, transparent 100%); }
+.ex-text-1 { 
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #FFFADD; 
+  line-height: 1.5; 
+  text-align: left; 
+}
+
+.ex-text-2 { 
+  font-size: 14px; 
+  font-weight: 900; 
+  color: #ffffff; 
+  line-height: 1.3; 
+  text-align: left; 
+}
+
+.tab-row { display: flex; gap: 70px; justify-content: center; position: relative; z-index: 1; }
+.tab { padding: 9px 32px; border-radius: 50px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; }
+.tab.on {
+  background-color: #d8548a;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+}
+.tab.off {
+  background-color: #d8548a;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+}
+
+/* ─── REWARDS ─── */
+.rewards { 
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(94,226,1,0.2) 80.29%, rgba(94,226,1,0.2) 97.12%);
+  padding: 56px 24px 52px; 
+}
+.rewards .sec-title { text-align: center; margin-bottom: 28px; color: #00D402; font-size: 15px; font-weight: 700; }
+.reward-item { background: transparent; border-radius: 16px; border: none; border-radius: 0; border-bottom: none;}
+.reward-item::before { display: none; }
+.r-month { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 40px; }
+.r-brand { font-size: 13px; color: var(white); margin-bottom: 2px; }
+.r-desc { font-size: 13px; font-weight: 700; }
+.r-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.reward-special { border-radius: 16px; border: 1px; padding: 10px ; position: relative; overflow: hidden; }
+.reward-special::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: 3px 3px 0 0; }
+.special-row { display: flex; align-items: flex-start; gap: 16px; margin-top: 12px; }
+.special-info { flex: 1; text-align: center; word-break: keep-all; min-width: 0; }
+.special-brand { font-size: 11px; font-weight: 700; color: var(--white); margin-top: 6px; line-height: 1.5; }
+.special-brand .g { color: var(--white); }
+.special-note { font-size: 8px; color: var(--white); margin-top: 8px; }
+
+/* ─── FAQ ─── */
+.faq { background: #000000; padding: 100px 24px 100px; }
+.faq .sec-title { text-align: center; margin-bottom: 20px; font-size: 15px; font-weight: 700; }
+.faq-item { border-bottom: 1px solid #1E1E1E; }
+.faq-btn { width: 100%; background: none; border: none; color: var(--white); font-family: 'Noto Sans KR', sans-serif; font-size: 13px; font-weight: 600; text-align: left; padding: 16px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.faq-arrow { flex-shrink: 0; width: 22px; height: 22px; background: #1E1E1E; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gray); transition: transform 0.3s; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-ans { font-size: 12px; color: var(--gray); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s; }
+.faq-item.open .faq-ans { max-height: 150px; padding-bottom: 16px; }
+.faq-note { font-size: 10px; color: #555; margin-top: 4px; }
+
+/* ─── NOTICE ─── */
+.notice { background: #64A70C; padding: 36px 24px 50px; border-top: 1px solid #1A1A1A; }
+.notice-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 18px; }
+.notice ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.notice li { font-size: 9px; color: var(--white); line-height: 1.6; padding-left: 12px; position: relative; }
+.notice li::before { content: '·'; position: absolute; left: 0; color: var(--white); }
+
+/* ─── Sticky CTA ─── */
+.sticky-bottom { position: sticky; bottom: 0; padding: 12px 20px 20px; background: linear-gradient(0deg, rgba(10,10,10,1) 50%, transparent); z-index: 50; pointer-events: none; }
+.sticky-bottom .btn-primary { pointer-events: all; }
+</style>
+</head>
+<body>
+
+<div class="iphone-wrap">
+  <div class="iphone-shell">
+    <div class="btn-side btn-power"></div>
+    <div class="btn-side btn-vol-up"></div>
+    <div class="btn-side btn-vol-dn"></div>
+    <div class="btn-side btn-silent"></div>
+
+    <div class="iphone-screen-outer">
+      <div class="dynamic-island"></div>
+
+      <div class="iphone-scroll">
+        <div class="page">
+
+          <!-- HERO -->
+          <section class="hero">
+
+            <div class="hero-topbar">
+              <span class="event-label">EVENT</span>
+            </div>
+
+            <!-- Vector light beams -->
+            <svg class="vectors" viewBox="0 0 365 700" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <linearGradient id="v2g" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="white" stop-opacity="0.0"/>
+                  <stop offset="40%" stop-color="white" stop-opacity="0.4"/>
+                  <stop offset="100%" stop-color="white" stop-opacity="0.0"/>
+                </linearGradient>
+              </defs>
+              
+              <!-- Vector 2 — main spotlight -->
+              <polygon points="70,310 300,0 750,0" fill="url(#v2g)" opacity="0.7"/>!-- Vector 3 — tight bright core -->
+              <polygon points="-200,1000 50,350 -2000,0 -20000,0" fill="white" opacity="0.12"/>
+            </svg>
+
+            <span class="cosrx-logo">COSRX</span>
+
+            <div class="hero-text">
+              <h1 class="hero-title"><span style="font-weight:300;">피부도</span><br>
+                <img src="배우면.png" alt="배우면," style="height: 53px; margin-left: -4px; margin-top: 6px;">
+                <br>다르니까!</h1>
+              <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+            </div>
+
+            <div class="hero-meta">
+              <strong>코스알엑스 x 듀오링고</strong>
+              챌린지<br>26.05 - 10
+            </div>
+
+            <!-- TVC.png — 캐릭터 + 화장품 이미지 -->
+            <div class="hero-char">
+              <img src="image 954.png" alt="병" style="
+              position:absolute;
+              top: -40px;
+              left: -2px;
+              width: 100px; "
+             </div>
+
+              <img src="듀오링고dlalwl 1.png" alt="Duo x COSRX"/>
+            </div>
+
+            <div class="hero-cta">
+              <a href="javascript:void(0)" class="btn-primary" onclick="goToNextPage()">챌린지 참여하기</a>
+            </div>
+          </section>
+
+          <div id="page2" style="display:none">
+
+          <!-- INTRO -->
+          <section class="intro">
+            <img src="Ellipse 44.png" style="position:absolute; top:-50px; left:50%; transform:translateX(-50%); width:100%; z-index:0; pointer-events:none;">
+            <p class="eyebrow">지친 대학생을 위해 준비한</p>
+            <h2 class="sec-title">코스알엑스 x 듀오링고 콜라보</h2>
+          
+          
+            <img src="Vector 841.png" style="width:250px; display:block; margin: 0 auto;">
+
+            <img src="image 1007.png" style="position:absolute; top:80px; left:120px; width:250px; height:300px; transform:rotate(16deg); z-index:0; pointer-events:none; opacity:20;">
+            <img src="image 1008.png" style="position:absolute; top:360px; left:-8px; width:240px; height:410px; transform:rotate(5deg); z-index:0; pointer-events:none; opacity:20;">
+
+            <div class="duo-doctor-area">
+              <img src="image 898.png" style="width:200px;">
+
+              <div class="bubble b1">
+                <img src="Rectangle 19447.png" style="width:110px; display:block;">
+                <span>밤샘 이슈..zzz</span>
+              </div>
+              <div class="bubble b2">
+                <img src="Rectangle 19448.png" style="width:70px; display:block;">
+                <span>피지 관리</span>
+              </div>
+              <div class="bubble b3">
+                <img src="Rectangle 19449.png" style="width:100px; display:block;">
+                <span>건조한 피부</span>
+              </div>
+            </div>
+            <p class="intro-msg">
+              <span class="tag">
+                <img src="Rectangle 19512.png" style="position:absolute; top:0; left:87px; width: 38%; height:52%;">
+                당신의 언어</span>로
+              <br>피부 변화를 기록하고 공유해주세요
+            </p>
+          </section>
+
+          <!-- STEP 1 -->
+          <section class="step1">
+           <img src="image 1011.png" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; pointer-events:none;">
+           <span class="step-badge" style="position:relative; z-index:1;">STEP 1</span>
+           <h2 class="step-title" style="position:relative; z-index:1;">코스알엑스로 데일리 케어 시작</h2>
+           <div class="products-row" style="position:relative; z-index:1;">
+              <div class="prod side"><img src="image 46.png" style="width:100px;"></div>
+              <div class="prod main"><img src="image 47.png" style="width:230px;"></div>
+              <div class="prod side"><img src="image 48.png" style="width:100px;"></div>
+            </div>
+          </section>
+
+          <!-- STEP 2 -->
+          <section class="step2">
+            <div class="lang-bg">
+              <img src="Hello.png" style="width:130px; position:absolute; top:150px; left:7px; opacity:0.6;">
+              <img src="안녕하세요.png" style="width:80px; position:absolute; top:300px; right:5px; opacity:0.6;">
+              <img src="こんにちは.png" style="width:200px; position:absolute; top: 330px; left:120px; opacity:0.6;">
+              <img src="Xin chào.png" style="width:100px; position:absolute; top:400px; left:20px; opacity:0.6;">
+              <img src="Hola.png" style="width:40px; position:absolute; top:400px; right:80px; opacity:0.6;">
+            </div>
+            <span class="step-badge" style="position:relative;z-index:1">STEP 2</span>
+            <h2 class="step-title" style="position:relative;z-index:1">듀오링고로 학습한 언어로<br>COSRX 후기 공유</h2>
+
+            <div style="position:relative; margin:25px auto 0; max-width:360px;">
+    <img src="듀오카드.png" style="width:100%; border-radius:18px; display:block;">
+  </div>
+
+</section>
+ 
+
+          <!-- EXAMPLES -->
+          <section class="examples">
+            <!-- 물감 효과 배경 PNG -->
+            <img src="image 1013.png" class="examples-bg" style="
+              width:240px; height:240px;
+              top:25px; left:-7px;">
+
+            <img src="image 1012.png" class="examples-bg" style="
+               width:350px; height:600px;
+               top:90px; left:-60px;">
+
+            <img src="image 1009.png" class="examples-bg" style="
+              width:380px; height:460px;
+              top:220px; left:50px;">
+
+            <h2 class="sec-title">예시 콘텐츠</h2>
+
+            <!-- 말풍선 + 듀오 (듀오가 왼쪽 아래) -->
+            <div class="speech-area">
+              <div class="speech-bubble-wrap">
+                <img src="Union.png" class="bubble-img" alt="speech bubble">
+                <div class="speech-text">
+                  자연스러운 일상과 함께 학습한 언어로 
+                  <br> 사용 전후의 변화를 솔직하게 담아주세요!
+                </div>
+              </div>
+              <img src="image 976.png" class="speech-duo" alt="duo">
+            </div>
+
+            <!-- 예시 카드 — 배지 카드 내부 상단 중앙 -->
+            <div class="example-grid">
+              <a href="https://www.youtube.com/shorts/tPZKQdeNTIM" target="_blank" style="text-decoration:none;color:inherit;">
+                <span class="ex-badge">예시 1</span>
+                <div class="ex-card" style="cursor:pointer; height:220px;">
+                  <img src="Rectangle 19470.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+                  <div class="ex-label" style="position:relative;z-index:2;">
+                    <div class="ex-text-1">대학생 시험기간<br>스킨 케어 Vlog</div>
+                  </div>
+                </div>
+              </a>
+
+              <a href="https://www.instagram.com/p/DXS8W0Kk4SJ/?igsh=OW9mdTRhMGUya3dy" target="_blank" style="text-decoration:none;color:inherit;">
+                <span class="ex-badge">예시 2</span>
+                <div class="ex-card" style="cursor:pointer; height:220px;">
+                  <img src="Rectangle 19471.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+                  <div class="ex-label" style="position:relative;z-index:2;">
+                     <div class="ex-text-2">SKIN CARE <br> ROUTINE</div>
+                  </div>
+                </div>
+              </a>
+            </div>
+
+            <div class="tab-row" style="margin-top:20px">
+              <button class="tab on" onclick="window.open('https://www.youtube.com/shorts/tPZKQdeNTIM','_blank')">숏폼</button>
+              <button class="tab off" onclick="window.open('https://www.instagram.com/p/DXS8W0Kk4SJ/?igsh=OW9mdTRhMGUya3dy','_blank')">피드</button>
+            </div>
+          </section>
+            
+
+          
+
+          <!-- REWARDS -->
+          <section class="rewards">
+            <img src="Rectangle 19467.png" style="position:absolute; top:0; left:0; width:100%; height:100%;  z-index:0; pointer-events:none; opacity:1;">
+            <h2 class="sec-title">리워드</h2>
+            <div class="reward-item">
+              <div><div class="r-month">Month 1</div><div class="r-brand">코스알엑스</div><div class="r-desc">10% 할인 쿠폰 증정</div></div>
+              <div class="r-icon"><img src="image 967.png" style="width:100px; bottom:45px; left: 200px; position: relative;"></div>
+            </div>
+            <div class="reward-item">
+              <div><div class="r-month">Month 3</div><div class="r-brand">코스알엑스</div><div class="r-desc">시딩 박스 증정</div></div>
+              <div class="r-icon"><img src="image 969.png" style="width:100px; bottom:35px; left: 250px; position: relative;"></div>
+            </div>
+            <div class="reward-item">
+              <div><div class="r-month">Month 5</div><div class="r-brand">코스알엑스</div><div class="r-desc">시딩 박스 & 30% 할인 쿠폰 증정</div></div>
+              <div class="r-icon"><img src="image 972.png" style="width:100px; bottom:25px; left: 200px; position: relative;"></div>
+            </div>
+            <div class="reward-special">
+              <div class="special-row">
+                <div style="font-size:50px"><img src="group 634156.png" style="width:200px; top: 10px; right: 40px; position: relative;"></div>
+                <div class="special-info">
+                  <div class="r-month">Month 6</div>
+                  <div class="special-brand"><span class="g">듀오링고</span><br>n개월 무료 이용권</div>
+                  <div class="special-brand"><span class="g">코스알엑스</span><br>시크릿 랜덤박스 + 50% 할인쿠폰</div>
+                  <p class="special-note">6개월 이상 참여자 중 추수 인원에게 증정</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- FAQ -->
+          <section class="faq">
+            <h2 class="sec-title">많이 묻는 질문</h2>
+            <div class="faq-item">
+              <button class="faq-btn" onclick="toggleFaq(this)">업로드 채널이 정해져 있나요?<span class="faq-arrow">▾</span></button>
+              <div class="faq-ans">Instagram / Youtube / TikTok / Reddit 중 올려주시면 됩니다.<br><span class="faq-note">* 타채널 미인정 가능합니다. <br>* 반드시 공개 계정으로 해주셔야 인정됩니다.</span></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-btn" onclick="toggleFaq(this)">업로드 후 인증은 어떻게 하나요?<span class="faq-arrow">▾</span></button>
+              <div class="faq-ans">상세페이지 참여하기 버튼을 누른 후 구글폼에 링크를 입력해주시면 됩니다.</div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-btn" onclick="toggleFaq(this)">업로드 기간은 아무때나 올리면 되나요?<span class="faq-arrow">▾</span></button>
+              <div class="faq-ans">안내해드린 기한 안에 업로드해주시면 됩니다.<br><span class="faq-note">* 예) 5월 챌린지 → 5월 1일 ~ 5월 31일까지.</span></div>
+            </div>
+            <div class="faq-item">
+              <button class="faq-btn" onclick="toggleFaq(this)">콘텐츠 전체에 다른 언어를 사용해야 하나요?<span class="faq-arrow">▾</span></button>
+              <div class="faq-ans">전체를 사용할 필요는 없으나 한 문장은 <br> 듀오링고에서 학습한 반드시 다른 언어를 사용해야 합니다.</div>
+            </div>
+          </section>
+
+          <!-- NOTICE -->
+          <section class="notice">
+            <p class="notice-title">안내사항</p>
+            <ul>
+              <li>비공개 계정 또는 참여 조건 미충족 시 이벤트 참여가 인정되지 않을 수 있습니다<div class=""></div></li>
+              <li>업로드 일정 및 미션을 완료한 참여자에 한해 리워드가 제공됩니다<div class=""></div></li>
+              <li>콘텐츠는 추후 브랜드 마케팅 자료로 활용될 수 있습니다.</li>
+            </ul>
+          </section>
+          </div><!-- #page2 -->
+
+        </div><!-- .page -->
+      </div><!-- .iphone-scroll -->
+    </div><!-- .iphone-screen-outer -->
+  </div><!-- .iphone-shell -->
+</div><!-- .iphone-wrap -->
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const was = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!was) item.classList.add('open');
+}
+
+function goToNextPage() {
+  document.getElementById('page2').style.display = 'block';
+  document.querySelector('.iphone-scroll').style.overflowY = 'scroll';
+  document.querySelector('.iphone-scroll').scrollTo({ top: 780, behavior: 'smooth' });
+}
+
+</script>
+</body>
+</html>
